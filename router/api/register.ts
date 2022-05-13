@@ -33,6 +33,19 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         }
     })
 
+    const userJsonFile = {
+        username: username,
+        favoriteSongs: [],
+        playlists: [],
+        friends: []
+    }
+
+    fs.writeFile(`${path.join(PROJECT_DIRECTION, 'files', username)}.json`, JSON.stringify(userJsonFile), (error)=>{
+        if(error){
+            throw error
+        }
+    })
+
     await newUser.save()
 
     return res.status(201).send({ message: 'User successfully created' })
