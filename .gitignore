@@ -1,5 +1,0 @@
-.gitignore
-
-/node_modules
-/compilated
-newrelic_agent.log
