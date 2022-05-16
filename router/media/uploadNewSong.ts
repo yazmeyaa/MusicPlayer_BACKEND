@@ -1,7 +1,9 @@
-import { Request, Response } from 'express'
-import fs from 'fs'
 import { PROJECT_DIRECTION } from '../..'
+import { Request, Response } from 'express'
+import { SingleSong } from '../../models/SingleSong'
 import path from 'path'
+import fs from 'fs'
+
 
 type reqBodyData = {
     username: string,
@@ -26,16 +28,28 @@ export function uploadNewSong(req: Request<{}, {}, reqBodyData>, res: Response) 
     const allowedExt = RegExp(/^.*\.(mp3|ogg)$/)
     const isFileExtensionAllowed = allowedExt.test(file.originalname)
 
-    if(!isFileExtensionAllowed){
-        return res.status(403).send({error: 'wrong file extension'})
+    if (!isFileExtensionAllowed) {
+        return res.status(403).send({ error: 'wrong file extension' })
     }
 
-    fs.writeFile(path.join(PROJECT_DIRECTION, 'files', 'music', file.originalname), file.path, (error)=>{
-        if(error){
-            throw error
+    const pathToSong = path.join(PROJECT_DIRECTION, 'files', 'music', file.originalname)
+
+    fs.writeFile(pathToSong, file.path, (error) => {
+        if (error) {
+          throw error
         }
     })
 
+    const modelToSave = new SingleSong({
+        name: name,
+        originalFileName: pathToSong,
+        duration: duration, 
+        path: pathToSong,
+        lycics: lycics ? lycics : '',
+        author: author
+    })
+
+    modelToSave.save()
 
     return res.status(200).send({ message: 'ok' })
 }

@@ -34,4 +34,5 @@ async function startServer() {
 app.post('/api/register', registerNewUser)
 app.post('/api/auth', authUser)
 app.post('/meida/uploadNewSong', upload.single('song'), uploadNewSong)
+
 startServer()
