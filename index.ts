@@ -5,6 +5,7 @@ import { registerNewUser } from './router/api/register'
 import { authUser } from './router/api/auth'
 import { uploadNewSong } from './router/media/uploadNewSong'
 import multer from 'multer'
+import { getSongList } from './router/media/getSongList'
 const upload = multer({ dest: 'uploads/' })
 
 const app = express()
@@ -34,5 +35,6 @@ async function startServer() {
 app.post('/api/register', registerNewUser)
 app.post('/api/auth', authUser)
 app.post('/meida/uploadNewSong', upload.single('song'), uploadNewSong)
+app.get('/media/getSongList', getSongList)
 
 startServer()

@@ -8,9 +8,9 @@ import fs from 'fs'
 type reqBodyData = {
     username: string,
     name: string,
-    author?: string,
-    lycics?: string,
-    duration?: number,
+    author: string,
+    lycics: string,
+    duration: number,
 }
 
 export function uploadNewSong(req: Request<{}, {}, reqBodyData>, res: Response) {
@@ -36,14 +36,14 @@ export function uploadNewSong(req: Request<{}, {}, reqBodyData>, res: Response) 
 
     fs.writeFile(pathToSong, file.path, (error) => {
         if (error) {
-          throw error
+            throw error
         }
     })
 
     const modelToSave = new SingleSong({
         name: name,
         originalFileName: pathToSong,
-        duration: duration, 
+        duration: duration,
         path: pathToSong,
         lycics: lycics ? lycics : '',
         author: author
