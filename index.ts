@@ -6,13 +6,14 @@ import { authUser } from './router/api/auth'
 import { uploadNewSong } from './router/media/uploadNewSong'
 import multer from 'multer'
 import { getSongList } from './router/media/getSongList'
+import cors from 'cors'
+
+
 const upload = multer({ dest: 'uploads/' })
 
 const app = express()
 
 export const PROJECT_DIRECTION = __dirname
-
-app.use(express.json())
 
 async function startServer() {
     try {
@@ -31,6 +32,9 @@ async function startServer() {
         throw error
     }
 }
+
+app.use(cors())
+app.use(express.json())
 
 app.post('/api/register', registerNewUser)
 app.post('/api/auth', authUser)

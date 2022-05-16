@@ -28,5 +28,5 @@ export async function getSongList(req: Request, res: Response) {
     })
 
 
-    res.status(200).send({ allSongs: response })
+    res.status(200).send(response)
 }
