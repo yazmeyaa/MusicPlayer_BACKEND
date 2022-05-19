@@ -7,6 +7,7 @@ import { uploadNewSong } from './router/media/uploadNewSong'
 import multer from 'multer'
 import { getSongList } from './router/media/getSongList'
 import cors from 'cors'
+import { getSingleSong } from './router/media/getSingleSong'
 
 
 const upload = multer({ dest: 'uploads/' })
@@ -40,5 +41,6 @@ app.post('/api/register', registerNewUser)
 app.post('/api/auth', authUser)
 app.post('/meida/uploadNewSong', upload.single('song'), uploadNewSong)
 app.get('/media/getSongList', getSongList)
+app.get('/media/getSingleSong', getSingleSong)
 
 startServer()

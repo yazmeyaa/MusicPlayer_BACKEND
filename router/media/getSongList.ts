@@ -25,7 +25,9 @@ export async function getSongList(req: Request, res: Response) {
             duration: item.duration,
         }
         return newObject
+
     })
+
 
 
     res.status(200).send(response)
