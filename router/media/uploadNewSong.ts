@@ -32,7 +32,7 @@ export function uploadNewSong(req: Request<{}, {}, reqBodyData>, res: Response) 
         return res.status(403).send({ error: 'wrong file extension' })
     }
 
-    const pathToSong = path.join(PROJECT_DIRECTION, 'files', 'music', file.originalname)
+    const pathToSong = path.join('../../files/music')
 
     fs.writeFile(pathToSong, file.path, (error) => {
         if (error) {

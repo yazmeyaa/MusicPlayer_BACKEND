@@ -9,7 +9,7 @@ type requestBody = {
 }
 
 export async function authUser(req: Request<{}, {}, requestBody>, res: Response) {
-    
+
     const { username, password } = req.body
 
     if (!username || !password) {
@@ -27,9 +27,16 @@ export async function authUser(req: Request<{}, {}, requestBody>, res: Response)
     }
 
     const userToken = JWT.sign({ messageToHacker: 'why do you look this string?' }, config.get('JWTsecret'), { expiresIn: '1d' })
+
+
+
+    res.cookie('JWT', userToken, {
+        expires: new Date(Date.now() + (1000 * 60 * 60 * 24)),
+        httpOnly: true
+    })
+
     return res.status(200).send({
-        message: 'successfully authorised',
-        JWT: userToken
+        message: 'successfully authorised'
     })
 
 }

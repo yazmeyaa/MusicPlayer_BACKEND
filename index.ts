@@ -8,7 +8,7 @@ import multer from 'multer'
 import { getSongList } from './router/media/getSongList'
 import cors from 'cors'
 import { getSingleSong } from './router/media/getSingleSong'
-
+import cookieParser from 'cookie-parser'
 
 const upload = multer({ dest: 'uploads/' })
 
@@ -36,6 +36,7 @@ async function startServer() {
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 app.post('/api/register', registerNewUser)
 app.post('/api/auth', authUser)
