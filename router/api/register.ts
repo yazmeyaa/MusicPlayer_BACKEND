@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
-import { User } from '../../models/User'
-import { PROJECT_DIRECTION } from '../../index'
+import { User } from '../../Models/User'
 import fs from 'fs'
 import path from 'path'
 
@@ -27,7 +26,7 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         password: password
     })
 
-    fs.mkdir(path.join(PROJECT_DIRECTION, 'files', username), (error) => {
+    fs.mkdir(path.join('../../files', username), (error) => {
         if (error) {
             throw error
         }
@@ -40,7 +39,7 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         friends: []
     }
 
-    fs.writeFile(`${path.join(PROJECT_DIRECTION, 'files', username)}.json`, JSON.stringify(userJsonFile), (error)=>{
+    fs.writeFile(`${path.join('../../files', username)}.json`, JSON.stringify(userJsonFile), (error)=>{
         if(error){
             throw error
         }

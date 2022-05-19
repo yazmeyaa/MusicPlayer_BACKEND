@@ -19,10 +19,11 @@ export async function getSongList(req: Request, res: Response) {
 
     const response = allSongs.map((item) => {
         const newObject = {
+            _id: item._id,
             name: item.name,
             author: item.author,
             lyrics: item.lyrics,
-            duration: item.duration,
+            duration: item.duration
         }
         return newObject
 
