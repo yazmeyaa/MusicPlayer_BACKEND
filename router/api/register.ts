@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { User } from '../../Models/User'
+import { User } from '../../models/User'
 import fs from 'fs'
 import path from 'path'
 
@@ -39,7 +39,7 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         friends: []
     }
 
-    fs.writeFile(`${path.join('../../files', username)}.json`, JSON.stringify(userJsonFile), (error)=>{
+    fs.writeFile(`../../files/${username}/${username}.json`, JSON.stringify(userJsonFile), (error)=>{
         if(error){
             throw error
         }
