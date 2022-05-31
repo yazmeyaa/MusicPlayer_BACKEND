@@ -42,9 +42,9 @@ export function uploadNewSong(req: Request<{}, {}, reqBodyData>, res: Response) 
 
     const modelToSave = new SingleSong({
         name: name,
-        originalFileName: pathToSong,
-        duration: duration,
         path: pathToSong,
+        originalFileName: file.originalname,
+        duration: duration,
         lycics: lycics ? lycics : '',
         author: author
     })
