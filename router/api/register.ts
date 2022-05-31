@@ -26,12 +26,6 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         password: password
     })
 
-    fs.mkdir(path.join('../../files', username), (error) => {
-        if (error) {
-            throw error
-        }
-    })
-
     const userJsonFile = {
         username: username,
         favoriteSongs: [],
@@ -39,11 +33,19 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         friends: []
     }
 
-    fs.writeFile(`../../files/${username}/${username}.json`, JSON.stringify(userJsonFile), (error)=>{
+    const userFolder = path.join(__dirname, '../../files', username)
+
+    fs.mkdir(userFolder, (error)=>{
+        if(error){
+            console.log(error)
+        }
+    })
+
+    fs.writeFile(`${userFolder}/${username}.json`, JSON.stringify(userJsonFile), (error)=>{
         if(error){
             throw error
         }
-    })
+    })  
 
     await newUser.save()
 
