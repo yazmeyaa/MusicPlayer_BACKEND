@@ -1,5 +1,0 @@
-{
-    "PORT": 3000,
-    "mongoDBsecret": "mongodb+srv://yazmeyaa:enter1zexlol1@musicplayer.plkhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "JWTsecret": "agtj42xc_32"
-}
