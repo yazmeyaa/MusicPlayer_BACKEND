@@ -2,3 +2,4 @@
 /uploads
 newrelic_agent.log
 .vercel
+/config
