@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node compilated.js",
+    "start": "nodemon index.ts",
     "deploy": "vercel deploy --prod"
   },
   "keywords": [],

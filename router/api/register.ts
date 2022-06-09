@@ -1,7 +1,5 @@
 import { Request, Response } from 'express'
 import { User } from '../../models/User'
-import fs from 'fs'
-import path from 'path'
 
 interface requestBody {
     username: string,
@@ -25,27 +23,6 @@ export async function registerNewUser(req: Request<{}, {}, requestBody>, res: Re
         username: username,
         password: password
     })
-
-    const userJsonFile = {
-        username: username,
-        favoriteSongs: [],
-        playlists: [],
-        friends: []
-    }
-
-    const userFolder = path.join(__dirname, '../../files', username)
-
-    fs.mkdir(userFolder, (error)=>{
-        if(error){
-            console.log(error)
-        }
-    })
-
-    fs.writeFile(`${userFolder}/${username}.json`, JSON.stringify(userJsonFile), (error)=>{
-        if(error){
-            throw error
-        }
-    })  
 
     await newUser.save()
 
